@@ -11,6 +11,7 @@ public class LoggingRepoImpl implements LoggingRepo {
 	public void saveLog(String logData) {
 		// TODO Auto-generated method stub
 		cMap.put("logData", "입력하신 Logging Data 는 "+logData+" 입니다.");
+		System.out.println("Commit 갱신을 위함.");
 	}
 
 	@Override
