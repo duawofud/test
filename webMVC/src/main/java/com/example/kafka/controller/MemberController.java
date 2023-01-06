@@ -9,16 +9,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.kafka.domain.Member;
+import com.example.kafka.service.KafkaService;
 import com.example.kafka.service.MemberService;
 
 @Controller
 public class MemberController {
 
 	private final MemberService memberService;
+	private final KafkaService kafkaService;
+	
 
 	@Autowired
-	public MemberController(MemberService memberService) {
+	public MemberController(MemberService memberService , KafkaService kafkaService) {
 		this.memberService = memberService;
+		this.kafkaService = kafkaService;
 	}
 
 	@GetMapping(value = "/members/new")
@@ -41,4 +45,17 @@ public class MemberController {
 	 model.addAttribute("members", members);
 	 return "members/memberList";
 	}
+	
+	@GetMapping(value = "/members/kafka")
+	public String createFormKafka() {
+		return "members/createMemberFormkafka";
+	}
+
+	@PostMapping(value = "/members/newkafka")
+	public String createKafka(MemberForm form) {
+		Member member = new Member();
+		member.setName(form.getName());
+		kafkaService.sendMessage(member);
+		return "redirect:/";
+	}	
 }

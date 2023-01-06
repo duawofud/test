@@ -16,7 +16,10 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 
 import com.example.kafka.Repository.JdbcTemplateMemberRepository;
+import com.example.kafka.Repository.KafkaMembeRepository;
+import com.example.kafka.Repository.KafkaRepository;
 import com.example.kafka.Repository.MemberRepository;
+import com.example.kafka.service.KafkaService;
 import com.example.kafka.service.MemberService;
 
 @Configuration
@@ -60,6 +63,7 @@ public class KafkaConfiguration {
 	 * kafka Configuration
 	 * @return
 	 */
+	
 
     @Bean
     public KafkaTemplate<String, String> kafkaTemplate() {
@@ -76,6 +80,17 @@ public class KafkaConfiguration {
         return new DefaultKafkaProducerFactory(configs);
     }
     
+ 
+	@Bean
+	public KafkaService kafkaService() {
+		return new KafkaService(kafkaRepository());
+	}
+	
+	@Bean
+	public KafkaRepository kafkaRepository() {
+//		return new MemoryMemberRepository();
+		return new KafkaMembeRepository(new KafkaTemplate<>(producerFactory()), dataSource);
+	}    
 //	@Bean
 //	public TimeTraceAop timetraceAop() {
 //		return new TimeTraceAop();
