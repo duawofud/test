@@ -20,7 +20,6 @@ public class KafkaController2 {
         this.producer = producer;
     }
 
-
     @PostMapping
     @ResponseBody
     public String sendMessage(@RequestParam String message) {
