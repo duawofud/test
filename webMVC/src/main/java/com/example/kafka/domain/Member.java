@@ -1,7 +1,5 @@
 package com.example.kafka.domain;
 
-import jakarta.persistence.Entity;
-
 public class Member {
 	
 	

@@ -15,9 +15,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.kafka.domain.Member;
 
-import jakarta.transaction.Transactional;
-
-@Transactional
 @Service
 public class KafkaMembeRepository implements KafkaRepository {
 	

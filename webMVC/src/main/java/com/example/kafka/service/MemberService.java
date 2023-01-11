@@ -3,7 +3,6 @@ package com.example.kafka.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.example.kafka.Repository.MemberRepository;
 import com.example.kafka.domain.Member;
