@@ -19,7 +19,7 @@ import com.example.kafka.domain.Member;
 public class KafkaMembeRepository implements KafkaRepository {
 	
 
-    private static final String TOPIC = "exam-topic";
+    private static final String TOPIC = "consumer";
     private final JdbcTemplate jdbcTemplate;
     
     @Autowired
@@ -32,16 +32,17 @@ public class KafkaMembeRepository implements KafkaRepository {
     }
 	
 	@Override
-	@KafkaListener(topics = "exam-topic", groupId = "foo")
+	@KafkaListener(topics = TOPIC, groupId = "foo")
 	public String KafkaConsumer(String userName) {
 		// TODO Auto-generated method stub
+		System.out.println("----------------------KafkaConsumer KafkaMembeRepository : "+userName);
 		SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
 		jdbcInsert.withTableName("member").usingGeneratedKeyColumns("id");
 		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("name", userName);
 		Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
-		System.out.println("[KafkaConsumer userName]--------------------------------"+userName);
-		System.out.println("[KafkaConsumer key]--------------------------------"+key);
+//		System.out.println("[KafkaConsumer userName]--------------------------------"+userName);
+//		System.out.println("[KafkaConsumer key]--------------------------------"+key);
 		return userName;
 	}
 

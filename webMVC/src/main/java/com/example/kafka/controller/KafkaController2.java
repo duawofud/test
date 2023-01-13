@@ -25,6 +25,6 @@ public class KafkaController2 {
     public String sendMessage(@RequestParam String message) {
         this.producer.sendMessage(message);
 
-        return "success";
+        return "success message:"+message;
     }
 }
