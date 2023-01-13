@@ -19,7 +19,7 @@ import com.example.kafka.domain.Member;
 public class KafkaMembeRepository implements KafkaRepository {
 	
 
-    private static final String TOPIC = "consumer";
+    private static final String TOPIC = "provider";
     private final JdbcTemplate jdbcTemplate;
     
     @Autowired
